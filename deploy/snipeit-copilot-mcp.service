@@ -1,0 +1,44 @@
+[Unit]
+Description=Snipe-IT Copilot MCP Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=snipeit-copilot-mcp
+Group=snipeit-copilot-mcp
+WorkingDirectory=/opt/snipeit-copilot-mcp
+EnvironmentFile=/etc/snipeit-copilot-mcp.env
+Environment=FASTMCP_HOME=/var/lib/snipeit-copilot-mcp
+Environment=MCP_TRANSPORT=streamable-http
+Environment=MCP_HOST=127.0.0.1
+Environment=MCP_PORT=8000
+ExecStart=/opt/snipeit-copilot-mcp/.venv/bin/python -m snipeit_copilot_mcp
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+UMask=0077
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/snipeit-copilot-mcp
+ReadWritePaths=/var/lib/snipeit-copilot-mcp
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+.git
+.env
+.venv
+.bootstrap
+.uv-cache
+.tmp
+.pytest_cache
+__pycache__
+tests
+htmlcov
+dist
+build
+pytest-cache-files-*
+.DS_Store
+.coverage
